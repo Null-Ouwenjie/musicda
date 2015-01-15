@@ -27,8 +27,8 @@ public class DebugUtils {
 	/*
 	 * 是否为调试模式，默认为true，发布前需改成false
 	 */
-//	private static boolean debug = false;
-	private static boolean debug = true;
+	private static boolean debug = false;
+//	private static boolean debug = true;
 
     private DebugUtils(){
 

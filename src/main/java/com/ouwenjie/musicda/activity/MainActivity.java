@@ -1,12 +1,13 @@
 package com.ouwenjie.musicda.activity;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import com.ouwenjie.musicda.adapter.PostsAdapter;
 import com.ouwenjie.musicda.db.LitePalHelper;
 import com.ouwenjie.musicda.model.Post;
 import com.ouwenjie.musicda.utils.ActionBarHelper;
+import com.ouwenjie.musicda.utils.DebugUtils;
 import com.ouwenjie.musicda.utils.DisplayAnimUtils;
 import com.ouwenjie.musicda.utils.JsonUtils;
 
@@ -90,8 +92,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private void initSlidePaneLayout(){
         mSlidePaneLayout = (SlidingPaneLayout) findViewById(R.id.slide_menu_layout);
         mSlidePaneLayout.closePane();
-//        mSlidePaneLayout.setSliderFadeColor (getResources().getColor(R.color.main_color));
-//        mSlidePaneLayout.setShadowResourceLeft(R.drawable.menu_shadow);
         mSlidePaneLayout.setPanelSlideListener(new SlidingPaneLayout.SimplePanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
@@ -198,7 +198,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
      * ListAdapter and turns off the progress bar.
      */
     private void onRefreshComplete(String result) {
-        Log.e(LOG_TAG, "onRefreshComplete");
+        DebugUtils.e(LOG_TAG, "onRefreshComplete");
         List<Post> posts = (JsonUtils.parseNewestPostsJson(result));
         Collections.reverse(posts);//反转数序，让最新的Post显示在最顶端
         List<Post> newPost = litePalHelper.selectNewPost(posts, mPostlist);//选出新加载的Post当中，当前列表不存在的新Post
@@ -309,18 +309,23 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int position = menuInfo.position;
-        Log.e(LOG_TAG,"=== "+ position +" ===");
+        DebugUtils.e(LOG_TAG,"=== "+ position +" ===");
         switch (item.getItemId()) {
-            case R.id.copy_context:
-                Log.e(LOG_TAG, "==复制==");
+            case R.id.copy_context:     // 复制内容到系统剪贴板
+                String text = new String();
+                text = mPostlist.get(position).getMusic().getName()+"\n"+mPostlist.get(position).getContent();
+                DebugUtils.e(LOG_TAG, "==复制==" + "  " + text);
+                ClipboardManager cmb = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                cmb.setPrimaryClip(ClipData.newPlainText(null, text));
                 return true;
             case R.id.collect_context:
-                Log.e(LOG_TAG, "==收藏==");
+                DebugUtils.e(LOG_TAG, "==收藏==");
                 litePalHelper.setCollectionPost(mPostlist.get(position),true);
                 Toast.makeText(this,R.string.collect_success,Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.share_context:
-                Log.e(LOG_TAG, "==分享==");
+                DebugUtils.e(LOG_TAG, "==分享==");
+                Toast.makeText(this,"该功能将在新版本中添加...",Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onContextItemSelected(item);

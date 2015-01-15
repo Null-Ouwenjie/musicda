@@ -1,7 +1,5 @@
 package com.ouwenjie.musicda.utils;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.ouwenjie.musicda.model.Comment;
 import com.ouwenjie.musicda.model.Post;
@@ -47,7 +45,7 @@ public class JsonUtils {
      */
     public static List<Post> parsePostsJson(String res){
         Post[] posts = new Gson().fromJson(res, Post[].class);
-        Log.e("JsonUtil","get result posts`s item is : "+posts.length+"............");
+        DebugUtils.e("JsonUtil","get result posts`s item is : "+posts.length+"............");
         return Arrays.asList(posts);
     }
 }
