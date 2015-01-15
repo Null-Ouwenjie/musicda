@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dip"
+        android:paddingTop="6dip"
+        >
+
+        <TextView
+            android:id="@+id/refresh_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="6dp"
+
+            android:text="@string/pulltorefresh_drop"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/refresh_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/refresh_tv"
+            android:layout_centerVertical="true"
+            style="?android:attr/progressBarStyleSmall"
+            android:visibility="gone"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

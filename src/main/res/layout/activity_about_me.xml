@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/about_me_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/about_me_email_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        >
+
+    <ImageView
+        android:id="@+id/about_me_email_pic"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/email"
+        />
+
+    <TextView
+        android:id="@+id/about_me_email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/myemail"
+        />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/about_me_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/about_me_email_layout"
+        android:layout_marginTop="10dp"
+        android:text="Android Developer"
+        />
+
+    <TextView
+        android:id="@+id/about_me_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/about_me_text"
+        android:layout_marginTop="10dp"
+        android:text="欧文杰"
+        />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_toLeftOf="@id/about_me_text"
+        android:layout_alignBottom="@id/about_me_text"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_launcher"
+        />
+
+    <ImageView
+        android:id="@+id/about_me_iv"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/about_me_name"
+        android:src="@drawable/my_pic"
+        />
+</RelativeLayout>

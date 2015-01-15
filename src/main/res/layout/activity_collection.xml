@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/collect_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/collect_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#ffffff"
+        android:paddingTop="@dimen/listview_padding_top_bottom"
+        android:paddingBottom="@dimen/listview_padding_top_bottom"
+        android:showDividers="none"
+        />
+
+</LinearLayout>

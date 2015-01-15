@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light"/>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- 覆写actionBarStyle-->
+        <item name="android:actionBarStyle">@style/AcBar_style</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AcBar_style" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">#e07b53</item>
+        <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>
+    </style>
+
+    <style name="AcBar_titleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title.Inverse">
+        <item name="android:textColor">#FFFFFF</item>
+        <!--<item name="android:textStyle">bold</item>-->
+    </style>
+
+</resources>

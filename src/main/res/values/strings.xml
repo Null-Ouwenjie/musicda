@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Musicda</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="music_test">事实上，“富士山下”与其它大部份的林夕作品一样，都是用以表达林夕的人生观——放下回忆的包袱，珍惜眼前人(其实无论体裁有多大的差异，但林夕几乎所有的词作主旨都是走向同一个点的，只要能领悟林夕的人生观，就很容易可以参透他每一首词)。而具体到“富士山下”本身，是一首劝导人们放下一段感情的歌，就像近期他写的“情永落”、“情歌”差不多，只不过这次换成第一人称的视觉，去劝导自己的前任女朋友而已。</string>
+    <string name="titlebar_text">Musicda!</string>
+    <string name="title_activity_loading">LoadingActivity</string>
+    <string name="myemail">going.ouwenjie@gmail.com</string>
+    <string name="title_activity_shared">分享</string>
+    <string name="pulltorefresh_drop">下拉刷新</string>
+    <string name="collect_success">收藏成功</string>
+    <string name="title_activity_settings">设置</string>
+</resources>
