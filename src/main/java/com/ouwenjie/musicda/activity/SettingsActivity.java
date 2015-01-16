@@ -3,6 +3,7 @@ package com.ouwenjie.musicda.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -85,6 +86,17 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                DisplayAnimUtils.slideLeftInRightOut(this);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

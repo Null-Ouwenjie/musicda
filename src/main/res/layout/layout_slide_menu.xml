@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:text="musicda.avosapps.com"
+            android:text="@string/url_musicda"
             android:textColor="#d1d1d1"
             />
         <TextView
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="30dp"
             android:layout_gravity="center_horizontal"
-            android:text="分享音乐背后的感触和故事"
+            android:text="@string/means_musicda"
             android:textColor="#D1D1D1"
             />
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical"
-                android:text="收藏"
+                android:text="@string/collection"
                 android:textSize="24sp"
                 android:textColor="#e07b53"
                 />
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical"
-                android:text="查找"
+                android:text="@string/find"
                 android:textSize="24sp"
                 android:textColor="#e07b53"
                 />
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center_vertical"
-                android:text="分享"
+                android:text="@string/shared"
                 android:textSize="24sp"
                 android:textColor="#e07b53"
                 />
@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="设置"
+                android:text="@string/settings"
                 android:textSize="24sp"
                 android:textColor="#e07b53"
                 />
@@ -196,7 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="关于"
+                android:text="@string/about"
                 android:textSize="24sp"
                 android:textColor="#e07b53"
                 />

@@ -1,7 +1,7 @@
 package com.ouwenjie.musicda.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,7 +47,6 @@ public class HelpActivity extends BaseActivity {
         int id = item.getItemId();
         switch(id){
             case android.R.id.home:
-                startActivity(new Intent(HelpActivity.this, AboutMusicdaActivity.class));
                 finish();
                 DisplayAnimUtils.slideLeftInRightOut(this);
                 break;
@@ -57,6 +56,16 @@ public class HelpActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                finish();
+                DisplayAnimUtils.slideLeftInRightOut(this);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

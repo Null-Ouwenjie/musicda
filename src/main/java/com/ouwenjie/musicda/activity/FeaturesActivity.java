@@ -1,7 +1,7 @@
 package com.ouwenjie.musicda.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
@@ -40,12 +40,22 @@ public class FeaturesActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                finish();
+                DisplayAnimUtils.slideLeftInRightOut(this);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
         switch(id){
             case android.R.id.home:
-                startActivity(new Intent(FeaturesActivity.this, AboutMusicdaActivity.class));
                 finish();
                 DisplayAnimUtils.slideLeftInRightOut(this);
                 break;

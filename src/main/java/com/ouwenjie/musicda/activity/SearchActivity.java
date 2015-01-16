@@ -3,6 +3,7 @@ package com.ouwenjie.musicda.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -90,6 +91,17 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         mSearchBtn = (Button) findViewById(R.id.search_song_btn);
         mSearchBtn.setOnClickListener(this);
 
+    }
+
+    @Override
+      public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                startActivity(new Intent(SearchActivity.this, MainActivity.class));
+                DisplayAnimUtils.slideLeftInRightOut(this);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.ouwenjie.musicda.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,7 +47,7 @@ public class AboutMusicdaActivity extends BaseActivity implements View.OnClickLi
     private void initLayout() {
 
         mRootLayout = (ViewGroup) findViewById(R.id.about_musicda_layout);
-        mRootLayout.setOnTouchListener(this);
+        mRootLayout.setOnTouchListener(this);   // 检测触摸事件才能侧滑
 
         mActionBarHelper = new ActionBarHelper(this);
         mActionBarHelper.onPanelClosed();
@@ -65,7 +66,6 @@ public class AboutMusicdaActivity extends BaseActivity implements View.OnClickLi
         mDeveloper.setOnClickListener(this);
         mAboutLink.setOnClickListener(this);
 
-
     }
 
     @Override
@@ -81,6 +81,17 @@ public class AboutMusicdaActivity extends BaseActivity implements View.OnClickLi
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                startActivity(new Intent(AboutMusicdaActivity.this, MainActivity.class));
+                DisplayAnimUtils.slideLeftInRightOut(this);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

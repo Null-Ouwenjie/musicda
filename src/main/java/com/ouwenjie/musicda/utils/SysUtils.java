@@ -2,6 +2,8 @@ package com.ouwenjie.musicda.utils;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -268,9 +270,14 @@ public class SysUtils {
     /**
      * 检测WIFI连接的状态
      */
-    public static boolean isWifiConnect(Context context) {
-        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public boolean isWifiConnect() {
+        ConnectivityManager connManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return mWifi.isConnected();
+    }
+
+    public void copyToSysClipboard(String string){
+        ClipboardManager cmb = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setPrimaryClip(ClipData.newPlainText(null, string));
     }
 }

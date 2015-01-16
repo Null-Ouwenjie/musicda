@@ -30,7 +30,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:text="Musicda 1.0.0"
+            android:text="@string/musicda_version"
             android:textColor="#606060"
             style="?android:attr/textAppearanceLarge"
             />
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="给 Muscida 评分"
+            android:text="@string/rate_musicda"
             />
 
 
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="特性"
+            android:text="@string/features"
             />
 
         <ImageView
@@ -102,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="帮助"
+            android:text="@string/help"
             />
 
         <ImageView
@@ -128,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="检查更新"
+            android:text="@string/check_updates"
             />
 
         <ImageView
@@ -153,7 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="开发者"
+            android:text="@string/developer"
             />
 
     </LinearLayout>
@@ -174,7 +174,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="25dp"
             android:layout_centerHorizontal="true"
-            android:text="关于Musicda!"
+            android:text="@string/About_Musicda"
             android:textColor="#ff2880c0"
             android:textStyle="bold"
             android:background="@drawable/bg_about_selector"

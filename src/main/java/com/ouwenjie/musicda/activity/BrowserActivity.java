@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.ouwenjie.musicda.R;
 import com.ouwenjie.musicda.base.BaseActivity;
 import com.ouwenjie.musicda.obj.Constant;
+import com.ouwenjie.musicda.utils.DisplayAnimUtils;
 import com.ouwenjie.musicda.utils.SysUtils;
 
 /**
@@ -41,37 +42,29 @@ public class BrowserActivity extends BaseActivity {
         preferences = mUtils.getPreferences();
         editor = mUtils.getEditor();
 
-
         //  获取webview所要加载的url
         String url = getIntent().getExtras().getString("POST_MOBILE_URL");
         initWebView(url);
-
     }
 
     protected void initWebView(String url) {
-
         mWebView = (WebView) findViewById(R.id.webView);
         mWebView.setOnTouchListener(this);
-
         mWebView.setWebViewClient(new WebViewClient() {
-
             // 在客户端中打开web页面
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
             }
-
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
             }
-
             @Override
             public void onPageFinished(WebView view, String url) {
                 dialog.dismiss();   //页面加载完毕，关闭dialog显示
             }
-
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
@@ -83,7 +76,7 @@ public class BrowserActivity extends BaseActivity {
         //如果系统设置了非WIFI环境下允许播放音乐，就启用js
         if(preferences.getBoolean(Constant.KEY_AUDIO_ENABLE, false)){
             mWebView.getSettings().setJavaScriptEnabled(true);
-        }else if (SysUtils.isWifiConnect(this)) {   // 若系统设置是不允许在非WIFI环境下播放音乐，则检测到WIFI环境下，启用js
+        }else if (mUtils.isWifiConnect()) {   // 若系统设置是不允许在非WIFI环境下播放音乐，则检测到WIFI环境下，启用js
             mWebView.getSettings().setJavaScriptEnabled(true);
         }
         mWebView.loadUrl(url);
@@ -95,13 +88,17 @@ public class BrowserActivity extends BaseActivity {
     // 消耗掉back按钮事件，使back可在网页中返回上一个网页。
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK && dialog.isShowing()){
-            dialog.dismiss();
-            return true;
-        }
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
-            mWebView.goBack();
-            return true;
+        if(keyCode == KeyEvent.KEYCODE_BACK) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+                return true;
+            } else if (mWebView.canGoBack()) {
+                mWebView.goBack();
+                return true;
+            } else {
+                finish();
+                DisplayAnimUtils.slideLeftInRightOut(this);
+            }
         }
         return super.onKeyDown(keyCode, event);
     }

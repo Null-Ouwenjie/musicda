@@ -1,8 +1,6 @@
 package com.ouwenjie.musicda.activity;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -28,6 +26,7 @@ import com.ouwenjie.musicda.utils.ActionBarHelper;
 import com.ouwenjie.musicda.utils.DebugUtils;
 import com.ouwenjie.musicda.utils.DisplayAnimUtils;
 import com.ouwenjie.musicda.utils.JsonUtils;
+import com.ouwenjie.musicda.utils.SysUtils;
 
 import org.apache.http.Header;
 
@@ -50,6 +49,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private SlidingPaneLayout mSlidePaneLayout;
     private ActionBarHelper actionBarHelper;
 
+    private SysUtils mSysUtils;
+
     private long lastTime_Back; //记录上一次按Back键的时间
 
     @Override
@@ -58,6 +59,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         setContentView(R.layout.activity_main);
 
         db = litePalHelper.getDB(); // 初始化数据库
+        mSysUtils = SysUtils.getInstance(this);
 
         initLayout();   // 初始化界面
         initPosts();    // 初始化Post列表
@@ -214,7 +216,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     // 后退键 响应事件
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 long currentTime_Back = System.currentTimeMillis();
@@ -231,9 +232,16 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         return super.onKeyDown(keyCode, event);
     }
 
-    // ListView 条目的点击事件
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        openPost(position);
+    }
+
+    /**
+     * 根据position,打开post的详细内容
+     * @param position
+     */
+    private void openPost(int position) {
         String url = mPostlist.get(position).getMobileUrl();
         Intent intent = new Intent(MainActivity.this, BrowserActivity.class);
         intent.putExtra("POST_MOBILE_URL", url);
@@ -241,47 +249,41 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         DisplayAnimUtils.slideRightInLeftOut(this);
     }
 
-    // 左侧菜单的点击事件
+    /**
+     * 左侧菜单的点击事件
+     */
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.menu_collect:
-                startActivity(new Intent(MainActivity.this,CollectionActivity.class));
-                DisplayAnimUtils.slideRightInLeftOut(this);
+                startActivity(new Intent(MainActivity.this, CollectionActivity.class));
                 break;
             case R.id.menu_search:
-                startActivity(new Intent(MainActivity.this,SearchActivity.class));
-                DisplayAnimUtils.slideRightInLeftOut(this);
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 break;
             case R.id.menu_share:
-                startActivity(new Intent(MainActivity.this,SharedActivity.class));
-                DisplayAnimUtils.slideRightInLeftOut(this);
+                startActivity(new Intent(MainActivity.this, SharedActivity.class));
                 break;
             case R.id.menu_setting:
-                startActivity(new Intent(MainActivity.this,SettingsActivity.class));
-                DisplayAnimUtils.slideRightInLeftOut(this);
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 break;
             case R.id.menu_about:
                 startActivity(new Intent(MainActivity.this, AboutMusicdaActivity.class));
-                DisplayAnimUtils.slideRightInLeftOut(this);
                 break;
             default:
                 break;
-
         }
+        DisplayAnimUtils.slideRightInLeftOut(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
@@ -306,7 +308,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int position = menuInfo.position;
         DebugUtils.e(LOG_TAG,"=== "+ position +" ===");
@@ -315,8 +316,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 String text = new String();
                 text = mPostlist.get(position).getMusic().getName()+"\n"+mPostlist.get(position).getContent();
                 DebugUtils.e(LOG_TAG, "==复制==" + "  " + text);
-                ClipboardManager cmb = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                cmb.setPrimaryClip(ClipData.newPlainText(null, text));
+                mSysUtils.copyToSysClipboard(text);
                 return true;
             case R.id.collect_context:
                 DebugUtils.e(LOG_TAG, "==收藏==");

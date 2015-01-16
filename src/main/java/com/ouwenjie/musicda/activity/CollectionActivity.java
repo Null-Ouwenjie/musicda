@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -80,11 +81,26 @@ public class CollectionActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        openPost(position);
+    }
+
+    private void openPost(int position) {
         String url = mPostList.get(position).getMobileUrl();
         Intent intent = new Intent(CollectionActivity.this, BrowserActivity.class);
         intent.putExtra("POST_MOBILE_URL", url);
         startActivity(intent);
         DisplayAnimUtils.slideRightInLeftOut(this);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                startActivity(new Intent(CollectionActivity.this, MainActivity.class));
+                DisplayAnimUtils.slideLeftInRightOut(this);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -108,14 +124,11 @@ public class CollectionActivity extends BaseActivity implements AdapterView.OnIt
         return super.onOptionsItemSelected(item);
     }
 
-
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, v, info);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_collection_listview_context,menu);
-
     }
 
     @Override

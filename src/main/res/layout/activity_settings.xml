@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="允许非WIFI网络下播放音乐"
+            android:text="@string/settings_audio_enable"
             />
 
         <CheckBox
@@ -37,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -63,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:hint="推送通知"
+            android:hint="@string/settings_push_notification"
             />
 
         <ImageView
@@ -100,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="意见反馈"
+            android:text="@string/feedback"
              />
 
         <ImageView

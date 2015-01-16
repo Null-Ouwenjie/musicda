@@ -20,7 +20,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Musicda for Android 1.0.0 版功能介绍"
+            android:text="@string/features_title"
             android:maxLines="1"
             android:ellipsize="end"
             android:textStyle="bold" />
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:text="1、最新Post"
+            android:text="@string/feature_1"
             android:textStyle="bold"
             />
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="            查看最新的Post"
+            android:text="@string/feature_1_details"
             />
 
         <TextView
@@ -52,14 +52,14 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:textStyle="bold"
-            android:text="2、收藏"
+            android:text="@string/feature_2"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="            随时收藏喜欢的Post"
+            android:text="@string/feature_2_details"
             />
 
 
@@ -68,14 +68,14 @@
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
             android:textStyle="bold"
-            android:text="3、分享"
+            android:text="@string/feature_3"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="            分享精彩的Post"
+            android:text="@string/feature_3_details"
             />
 
 

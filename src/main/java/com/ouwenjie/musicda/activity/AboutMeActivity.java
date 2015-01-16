@@ -2,6 +2,7 @@ package com.ouwenjie.musicda.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.ouwenjie.musicda.R;
 import com.ouwenjie.musicda.base.BaseActivity;
 import com.ouwenjie.musicda.utils.ActionBarHelper;
+import com.ouwenjie.musicda.utils.DisplayAnimUtils;
 
 /**
  * 关于我
@@ -38,6 +40,17 @@ public class AboutMeActivity extends BaseActivity{
         actionBarHelper = new ActionBarHelper(this);
         actionBarHelper.onPanelClosed();
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                finish();
+                DisplayAnimUtils.slideLeftInRightOut(this);
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
