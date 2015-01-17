@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ouwenjie.musicda.R;
@@ -30,7 +31,7 @@ public class BrowserActivity extends BaseActivity {
     private SysUtils mUtils;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-
+    private TextView mErrorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,14 @@ public class BrowserActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_post_detail);
 
+        mErrorText = (TextView) findViewById(R.id.error_textview);
+
         mUtils = SysUtils.getInstance(this);
         preferences = mUtils.getPreferences();
         editor = mUtils.getEditor();
 
-        //  获取webview所要加载的url
-        String url = getIntent().getExtras().getString("POST_MOBILE_URL");
+        //  获取post移动版所要加载的url
+        String url = getIntent().getExtras().getString(Constant.POST_MOBILE_URL);
         initWebView(url);
     }
 
@@ -70,6 +73,8 @@ public class BrowserActivity extends BaseActivity {
                 super.onReceivedError(view, errorCode, description, failingUrl);
                 dialog.dismiss();       // 网页加载失败
                 Toast.makeText(BrowserActivity.this,"网页链接失败...",Toast.LENGTH_LONG).show();
+                mWebView.setVisibility(View.GONE);
+                mErrorText.setVisibility(View.VISIBLE);
             }
         });
 

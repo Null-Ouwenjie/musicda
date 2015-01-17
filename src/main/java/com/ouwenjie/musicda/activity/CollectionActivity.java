@@ -19,6 +19,7 @@ import com.ouwenjie.musicda.adapter.PostsAdapter;
 import com.ouwenjie.musicda.base.BaseActivity;
 import com.ouwenjie.musicda.db.LitePalHelper;
 import com.ouwenjie.musicda.model.Post;
+import com.ouwenjie.musicda.obj.Constant;
 import com.ouwenjie.musicda.utils.ActionBarHelper;
 import com.ouwenjie.musicda.utils.DisplayAnimUtils;
 
@@ -87,7 +88,7 @@ public class CollectionActivity extends BaseActivity implements AdapterView.OnIt
     private void openPost(int position) {
         String url = mPostList.get(position).getMobileUrl();
         Intent intent = new Intent(CollectionActivity.this, BrowserActivity.class);
-        intent.putExtra("POST_MOBILE_URL", url);
+        intent.putExtra(Constant.POST_MOBILE_URL, url);
         startActivity(intent);
         DisplayAnimUtils.slideRightInLeftOut(this);
     }
