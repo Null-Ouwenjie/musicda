@@ -19,8 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="#ffffff"
-            android:paddingTop="@dimen/listview_padding_top_bottom"
-            android:paddingBottom="@dimen/listview_padding_top_bottom"
             android:showDividers="none" />
 
         </android.support.v4.widget.SwipeRefreshLayout>

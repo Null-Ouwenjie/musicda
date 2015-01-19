@@ -17,7 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.ouwenjie.musicda.MusicdaApplication;
 import com.ouwenjie.musicda.R;
 import com.ouwenjie.musicda.adapter.PostsAdapter;
 import com.ouwenjie.musicda.db.LitePalHelper;
@@ -47,6 +49,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     private LitePalHelper litePalHelper = new LitePalHelper();  // 数据库帮助类
     private SQLiteDatabase db;
 
+    private RequestQueue mQueue;
+
     private SlidingPaneLayout mSlidePaneLayout;
     private ActionBarHelper actionBarHelper;
 
@@ -61,6 +65,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         db = litePalHelper.getDB(); // 初始化数据库
         mSysUtils = SysUtils.getInstance(this);
+        mQueue = ((MusicdaApplication)getApplication()).getRequestQueue();
 
         initLayout();   // 初始化界面
         initPosts();    // 初始化Post列表
@@ -255,6 +260,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
      */
     @Override
     public void onClick(View v) {
+        mSlidePaneLayout.closePane();
         switch (v.getId()) {
             case R.id.menu_collect:
                 startActivity(new Intent(MainActivity.this, CollectionActivity.class));

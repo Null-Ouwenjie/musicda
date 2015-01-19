@@ -3,6 +3,6 @@
 
     <item android:state_pressed="true" android:drawable="@color/menu_bg"/>
 
-    <item android:drawable="@color/white"/>
+    <item android:drawable="@color/menu_bg"/>
 
 </selector>
