@@ -4,6 +4,7 @@
     android:id="@+id/menu_layout"
     android:layout_width="200dp"
     android:layout_height="match_parent"
+    android:background="#D0D0D0"
     >
 
     <LinearLayout
@@ -18,7 +19,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:text="@string/url_musicda"
-            android:textColor="#d1d1d1"
+            android:textColor="#ffffff"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
             android:paddingTop="30dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/means_musicda"
-            android:textColor="#D1D1D1"
+            android:textColor="#ffffff"
             />
 
         </LinearLayout>
@@ -81,6 +82,7 @@
             android:clickable="true"
             android:focusable="true"
             >
+
             <ImageView
                 android:id="@+id/menu_search_icon"
                 android:layout_width="24dp"

@@ -53,7 +53,6 @@ public class SharedActivity extends BaseActivity {
         Log.e("SharedActivity", "=== " + position + " ===");
 
         return super.onContextItemSelected(item);
-
     }
 
     @Override

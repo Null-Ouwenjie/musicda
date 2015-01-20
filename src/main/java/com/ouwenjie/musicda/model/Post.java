@@ -1,5 +1,8 @@
 package com.ouwenjie.musicda.model;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.ouwenjie.musicda.utils.HttpUtils;
 
@@ -24,6 +27,7 @@ public class Post extends DataSupport {
 
 
     private int collection;     // 标志该Post是否被收藏（>0）
+    public static final String NEWEST_POST_URL = "http://musicda.avosapps.com/api/posts/newest";
 
     public Post(){
 
@@ -123,8 +127,12 @@ public class Post extends DataSupport {
     }
 
     public static void getNewestPosts(AsyncHttpResponseHandler asyncHttpResponseHandler){
-        String url = "http://musicda.avosapps.com/api/posts/newest";
-        HttpUtils.get(url, asyncHttpResponseHandler);
+        HttpUtils.get(NEWEST_POST_URL, asyncHttpResponseHandler);
+    }
+
+    public static void getNewestPosts(RequestQueue mQueue,Response.Listener<String> listener,Response.ErrorListener errorlistener){
+        StringRequest request = new StringRequest(NEWEST_POST_URL,listener,errorlistener);
+        mQueue.add(request);
     }
 
     @Override

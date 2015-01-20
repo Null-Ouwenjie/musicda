@@ -18,7 +18,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.ouwenjie.musicda.MusicdaApplication;
 import com.ouwenjie.musicda.R;
 import com.ouwenjie.musicda.adapter.PostsAdapter;
@@ -30,8 +31,6 @@ import com.ouwenjie.musicda.utils.DebugUtils;
 import com.ouwenjie.musicda.utils.DisplayAnimUtils;
 import com.ouwenjie.musicda.utils.JsonUtils;
 import com.ouwenjie.musicda.utils.SysUtils;
-
-import org.apache.http.Header;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -162,7 +161,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         if (mPostlist.size() == 0) {    //数据库中没有内容,则启动网络请求数据
 
-            Post.getNewestPosts(new AsyncHttpResponseHandler() {
+            /*Post.getNewestPosts(new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
                     mPostlist.addAll(JsonUtils.parseNewestPostsJson(new String(bytes))); // 初始化数据源
@@ -172,6 +171,20 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 @Override
                 public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                     throwable.printStackTrace();
+                }
+            });*/
+
+            Post.getNewestPosts(mQueue,new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    mPostlist.addAll(JsonUtils.parseNewestPostsJson(s)); // 初始化数据源
+                    litePalHelper.saveAllPosts(mPostlist);// 将Post数据保存到数据库
+                    mAdapter.notifyDataSetChanged();        // 数据集被更改，通知Adapter更新ListViewtrue
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Toast.makeText(MainActivity.this,"初始化列表失败...",Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -187,7 +200,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
      */
     private void refreshPosts() {
 
-        Post.getNewestPosts(new AsyncHttpResponseHandler() {
+        /*Post.getNewestPosts(new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String result = new String(bytes);
@@ -197,6 +210,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 throwable.printStackTrace();
                 Toast.makeText(MainActivity.this, "更新失败...", Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+        Post.getNewestPosts(mQueue,new Response.Listener<String>() {
+            @Override
+            public void onResponse(String result) {
+                onRefreshComplete(result);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(MainActivity.this,"刷新列表失败...",Toast.LENGTH_SHORT).show();
             }
         });
     }
