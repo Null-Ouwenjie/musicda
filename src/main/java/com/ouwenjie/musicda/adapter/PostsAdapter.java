@@ -7,8 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.ouwenjie.musicda.R;
+import com.ouwenjie.musicda.model.BitmapCache;
+import com.ouwenjie.musicda.model.Music;
 import com.ouwenjie.musicda.model.Post;
+import com.ouwenjie.musicda.model.User;
 
 import java.util.List;
 
@@ -20,10 +26,13 @@ public class PostsAdapter extends BaseAdapter {
 
     private Context context;
     private List<Post> posts;
+    RequestQueue mQueue;
 
-    public PostsAdapter(Context context,List<Post> posts) {
+    public PostsAdapter(Context context,List<Post> posts,RequestQueue queue) {
         this.context = context;
         this.posts = posts;
+        this.mQueue = queue;
+
     }
 
     @Override
@@ -49,6 +58,7 @@ public class PostsAdapter extends BaseAdapter {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.layout_post_item,null);
 
+            viewHolder.userAvatar = (NetworkImageView) convertView.findViewById(R.id.post_user_avatar);
             viewHolder.musicName = (TextView) convertView.findViewById(R.id.music_name);
             viewHolder.musicArtist = (TextView) convertView.findViewById(R.id.music_artist);
             viewHolder.postContent = (TextView) convertView.findViewById(R.id.post_content);
@@ -62,24 +72,40 @@ public class PostsAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.musicName.setText(posts.get(position).getMusic().getName());
-        viewHolder.musicArtist.setText(posts.get(position).getMusic().getArtist());
-        viewHolder.postContent.setText(posts.get(position).getContent());
-        viewHolder.postLikes.setText("("+posts.get(position).getLikes()+")");
-        viewHolder.postComments.setText("("+posts.get(position).getReplies()+")");
-        viewHolder.postUserName.setText(posts.get(position).getUser().getName());
-        viewHolder.postCreateAt.setText(posts.get(position).getCreatedAt());
+        Post post = posts.get(position);
+        Music music = post.getMusic();
+        User user = post.getUser();
+        String avatarUrl = user.getAvatar();
+        if(avatarUrl.startsWith("//")){
+            avatarUrl = "https:"+avatarUrl;
+        }
+        if(avatarUrl.contains("{size}")){
+            avatarUrl = avatarUrl.replace("{size}",256+"");
+        }
+
+        viewHolder.userAvatar.setDefaultImageResId(R.drawable.musicda_icon);
+        viewHolder.userAvatar.setErrorImageResId(R.drawable.musicda_icon);
+        viewHolder.userAvatar.setImageUrl(avatarUrl,new ImageLoader(mQueue,new BitmapCache()));
+
+        viewHolder.postUserName.setText(user.getName());
+        viewHolder.musicName.setText(music.getName());
+        viewHolder.musicArtist.setText(music.getArtist());
+        viewHolder.postContent.setText(post.getContent());
+        viewHolder.postLikes.setText("("+post.getLikes()+")");
+        viewHolder.postComments.setText("("+post.getReplies()+")");
+        viewHolder.postCreateAt.setText(post.getCreatedAt());
 
         return convertView;
     }
 
     class ViewHolder{
+        NetworkImageView userAvatar;
+        TextView postUserName;
         TextView musicName;
         TextView musicArtist;
         TextView postContent;
         TextView postLikes;
         TextView postComments;
-        TextView postUserName;
         TextView postCreateAt;
 
     }

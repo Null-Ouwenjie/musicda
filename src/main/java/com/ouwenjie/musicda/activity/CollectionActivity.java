@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.ouwenjie.musicda.MusicdaApplication;
 import com.ouwenjie.musicda.R;
 import com.ouwenjie.musicda.adapter.PostsAdapter;
 import com.ouwenjie.musicda.base.BaseActivity;
@@ -44,10 +46,15 @@ public class CollectionActivity extends BaseActivity implements AdapterView.OnIt
 
     private ActionBarHelper actionBarHelper;
 
+    private RequestQueue mQueue;
+
+
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_collection);
+
+        mQueue = ((MusicdaApplication)getApplication()).getRequestQueue();
 
         initLayout();
         initList();
@@ -75,7 +82,7 @@ public class CollectionActivity extends BaseActivity implements AdapterView.OnIt
         if(mPostList.size() == 0) {
             Toast.makeText(this,"收藏夹为空",Toast.LENGTH_LONG).show();
         }else{
-            mAdapter = new PostsAdapter(this, mPostList);// 初始化适配器
+            mAdapter = new PostsAdapter(this, mPostList,mQueue);// 初始化适配器
             mListView.setAdapter(mAdapter);
         }
     }

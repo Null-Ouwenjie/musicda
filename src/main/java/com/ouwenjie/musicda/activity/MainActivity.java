@@ -175,7 +175,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 }
             });
         }
-        mAdapter = new PostsAdapter(this, mPostlist);// 初始化适配器
+        mAdapter = new PostsAdapter(this, mPostlist,mQueue);// 初始化适配器
         mListview.setAdapter(mAdapter);
 
         // 注册上下文菜单
@@ -241,6 +241,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         openPost(position);
+        String avatarUrl = mPostlist.get(position).getUser().getAvatar();
+        avatarUrl = avatarUrl.replace("{size}",256+"");
+        DebugUtils.e(avatarUrl);
     }
 
     /**

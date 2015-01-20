@@ -20,8 +20,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        >
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/post_user_avatar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/post_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
+            android:text="Ctrl Space"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingRight="10dp"
-        android:paddingTop="3dp"
         android:paddingBottom="3dp">
 
         <TextView
@@ -51,23 +75,16 @@
             android:text="陈奕迅"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            />
     </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#e07b53" />
 
     <TextView
         android:id="@+id/post_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:lineSpacingMultiplier="1.2"
+        android:padding="10dp"
         android:ellipsize="end"
         android:maxLines="5"
         android:text="@string/music_test" />
@@ -126,13 +143,6 @@
             android:layout_marginRight="10dp"
             android:text="2014-12-08" />
 
-        <TextView
-            android:id="@+id/post_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/post_create_at"
-            android:text="CtrlSpace" />
     </RelativeLayout>
 
 </LinearLayout>
